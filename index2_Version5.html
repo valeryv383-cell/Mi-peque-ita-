@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flores amarillas</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --dark-color: #000;
+      --fl-speed: 0.8s;
+      --speed-leaf: 2s;
+    }
+    body {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: var(--dark-color);
+      overflow: hidden;
+      perspective: 1000px;
+    }
+    .night {
+      position: fixed;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      filter: blur(0.1vmin);
+      background-image: radial-gradient(
+          ellipse at top,
+          transparent 0%,
+          var(--dark-color)
+        ),
+        radial-gradient(
+          ellipse at bottom,
+          var(--dark-color),
+          rgba(145, 233, 255, 0.2)
+        ),
+        repeating-linear-gradient(
+          220deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        repeating-linear-gradient(
+          189deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        repeating-linear-gradient(
+          148deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        linear-gradient(90deg, rgb(0, 255, 250), rgb(240, 240, 240));
+    }
+    .shooting-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .shooting-star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      animation: shootingStar 3s linear infinite;
+    }
+    .shooting-star::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      animation: shootingStarTail 3s linear infinite;
+    }
+    .shooting-star:nth-child(1) { top: 5%; left: -10%; animation-delay: 0s; animation-duration: 2.5s;}
+    .shooting-star:nth-child(2) { top: 15%; left: -10%; animation-delay: 2s; animation-duration: 3s;}
+    .shooting-star:nth-child(3) { top: 25%; left: -10%; animation-delay: 4s; animation-duration: 2.8s;}
+    .shooting-star:nth-child(4) { top: 0%; left: -10%; animation-delay: 6s; animation-duration: 3.2s;}
+    .shooting-star:nth-child(5) { top: 35%; left: -10%; animation-delay: 8s; animation-duration: 2.7s;}
+    .shooting-star:nth-child(6) { top: 8%; left: -10%; animation-delay: 10s; animation-duration: 3.1s;}
+    .shooting-star:nth-child(7) { top: 45%; left: -10%; animation-delay: 12s; animation-duration: 2.9s;}
+    .shooting-star:nth-child(8) { top: 3%; left: -10%; animation-delay: 14s; animation-duration: 3.3s;}
+    @keyframes shootingStar {
+      0% { opacity: 0; transform: translateX(0) translateY(0) rotate(45deg);}
+      10% { opacity: 1;}
+      90% { opacity: 1;}
+      100% { opacity: 0; transform: translateX(120vw) translateY(50vh) rotate(10deg);}
+    }
+    @keyframes shootingStarTail {
+      0% { width: 0;}
+      30% { width: 100px;}
+      100% { width: 0;}
+    }
+
+    /* --- Aquí incluirías TODO el CSS original de las flores (flowers, flower, flower__leaf, etc.) --- */
+    /* Puedes pegar todo el bloque de estilos que ya tienes para las flores y pasto */
+
+    /* ESTILOS PARA CORAZONES 💗 */
+    .hearts {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 99;
+    }
+    .heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 12px;
+      opacity: 0.85;
+      animation: heart-float 5s linear infinite;
+      text-shadow: 0 0 6px #fff6, 0 0 10px #f09ac9;
+      filter: drop-shadow(0 0 2px #fff);
+      user-select: none;
+    }
+    @keyframes heart-float {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(0);
+      }
+      10% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.2) translateY(-70vh);
+      }
+    }
+    /* TEXTO CENTRAL */
+    .mensaje-amor {
+      position: fixed;
+      left: 50vw;
+      top: 10vh;
+      z-index: 200;
+      transform: translate(-50%,0);
+      font-family: 'Segoe Script', 'Comic Sans MS', cursive, sans-serif;
+      font-size: 2.2rem;
+      color: #fff8dc;
+      text-shadow: 0 2px 10px #ff8c0088, 0 0 2px #000;
+      background: rgba(0,0,0,0.3);
+      padding: 1.4rem 2.2rem;
+      border-radius: 2rem;
+      border: 2px solid #ffd70099;
+      max-width: 90vw;
+      text-align: center;
+      box-shadow: 0 4px 24px #ffeb3b33;
+      font-weight: bold;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body class="not-loaded">
+  <div class="hearts" id="hearts"></div>
+  <div class="mensaje-amor">
+    a pesar de todo, te amo más que ayer, más que la vez que nos conocimos,<br>
+    y siempre será así, no puedo olvidar una fecha importante como soñar flores amarillas 💛
+  </div>
+  <!-- Elementos originales -->
+  <div class="night"></div>
+  <div class="shooting-stars">
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+  </div>
+  <div class="flowers">
+    <!-- Aquí pega el HTML original de las flores amarillas, tal como está en tu archivo base -->
+  </div>
+  <!-- FIN Elementos originales -->
+
+  <script>
+  // --- ANIMACIÓN DE CORAZONES 💗 ---
+  const hearts = document.getElementById('hearts');
+  const heartEmojis = ["💗"];
+  function random(min,max){return Math.random()*(max-min)+min;}
+  function spawnHeart() {
+      const heart = document.createElement('span');
+      heart.className = 'heart';
+      heart.innerText = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+      const size = random(10, 25);
+      heart.style.fontSize = size+'px';
+      heart.style.left = random(2,98) + 'vw';
+      heart.style.top = random(60,98) + 'vh';
+      heart.style.opacity = random(0.7,1);
+      heart.style.filter = `drop-shadow(0 0 4px #fff8) drop-shadow(0 0 10px #f09ac9)`;
+      heart.style.animationDuration = random(3.6,7.5).toFixed(2) + "s";
+      hearts.appendChild(heart);
+      setTimeout(()=>heart.remove(), 7000);
+  }
+  setInterval(spawnHeart, 120); // Muchos corazones pequeños y brillantes
+  for(let i=0;i<35;i++) setTimeout(spawnHeart, i*50);
+  </script>
+</body>
+</html>
